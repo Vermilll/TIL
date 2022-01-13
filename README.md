@@ -6,3 +6,6 @@
 
 #### 220112 ~ 220113
 [[모던 JavaScript 튜토리얼 - 코어 자바스크립트 - 자바스크립트 기본]](ModernJavaScript/Basic.md)
+
+#### 220113
+[[모던 JavaScript 튜토리얼 - 코어 자바스크립트 - 코드 품질]](ModernJavaScript/CodingPractice.md)
