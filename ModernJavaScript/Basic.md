@@ -278,3 +278,114 @@ begin은 반복문 최초 실행 시 실행되고, step은 body가 실행될 때
 labelname: for() {}
 ```
 레이블은 반복문 앞에 사용되면 중첩된 반복문 안에서 `break labelname`을 사용하여 한 번에 빠져나올 수 있다
+
+  ## 14. switch문
+  복수의 if문은 switch문으로 사용할 수 있다
+  ##### 문법
+  ```
+  switch(x) {
+  case 'value1' :
+  ...
+  [break]
+  
+  case 'value2' :
+  ...
+  [break]
+  
+  defalt:
+  ...
+  [break]}
+  ```
+  변수 x의 값과 value가 일치하면 코드를 실행한다  
+  `break`문이 없으면 일치하는 case 다음의 코드도 전부 실행된다 
+  일치하는 value의 case가 없다면 defalt의 코드가 실행된다  
+  
+  *x와 value가 같은 형이어야 한다
+  
+  ## 15. 함수
+  #### 함수 선언
+  ```
+  function name(parameters){
+  함수 본문 }
+  ```
+  함수 내에서 선언한 지역 변수(local variable)은 함수 안에서만 접근할 수 있다  
+  함수 내부에서 외부 변수에 접근할 수 있다
+  
+  #### 기본값
+  매개 변수에 값을 주지 않으면 `undefined`가 된다  
+  매개 변수 오른쪽에 `=기본값`을 입력하면 매개 변수가 입력되지 않았을 경우 입력한 값이 적용된다
+  ```
+  function showMessage(from, text = 'no given message') {
+  alert(from + ":" + text); }
+  ```
+  혹은
+  ```
+  function showMessage(text){
+  if text == undefined {
+  text = '빈 문자열'; }
+  ```
+  
+  #### 반환 값
+  코드 실행 중 `return`함수를 만나면 함수는 종료되고 해당 값을 반환한다
+  ```
+  function sum(a, b) {
+  return a + b; }
+  ```
+  
+  #### 함수 이름 짓기
+  함수는 보통 동작을 나타낸다  
+  `show` 무언가를 보여주는 함수  
+  `get` 값을 반환하는 함수  
+  `calc` 값을 계산하는 함수  
+  `create` 무언가를 생성하는 함수  
+  `check` 무언가를 확인하고 불린값을 반환하는 함수  
+  *함수는 이름에 언급된 동작 하나만 실행해야 한다
+  
+  ## 16. 함수 표현식
+  ```
+  let sayHi = fucntion() {
+  alert("hello"); };
+  ```
+  함수는 위와 같은 함수 표현식으로 나타낼 수 있다  
+  함수`sayHi`도 값이기 때문에 다른 값처럼 복사하거나 사용할 수 있다
+  
+  #### 콜백 함수
+  ```
+  function ask(question, yes, no) {
+  if (confirm(question)) yes()
+  else no();
+  }
+  
+  function showOkay() {
+  alert("동의하셨습니다");
+  }
+  
+  function showCancle() {
+  alert("취소하셨습니다");
+  }
+  
+  ask("동의하십니까?", showOkay, showCancle);
+  ```
+  `showOkay`와 `showCancle`을 함수를 다른 함수의 인수로 전달하고 나중에 호출하는 콜백함수라고 한다
+  
+  ```
+  ask(
+  "동의하십니까?",
+  function() {alert ("동의하셨습니다");},
+  function() {alert ("취소하셨습니다");} );
+  ```
+  이름없이 선언한 함수를 익명 함수라고 한다
+  
+  #### 함수 표현식과 함수 선언문
+  함수 표현식은 실제 실행 흐름이 함수 선언문에 도달했을 때 함수를 생성한다  
+  함수 선언문은 스크립트가 어디에 있는지 상관없이 사용할 수 있다
+  
+  ## 17. 화살표 함수 기본
+  ```
+  let func = (arg1, arg2, .. argN) => expression
+  ```
+  인자 arg1~argN을 받는 함수 func를 생성하고, 함수 func는 expression을 평가하고 반환한다  
+  중괄호와 함께 여러 줄로 작성했다면 `return`지시자를 사용해 반환해야 한다
+  
+  ## 18. 기본 문법 요약
+  https://ko.javascript.info/javascript-specials
