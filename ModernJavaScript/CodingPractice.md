@@ -27,4 +27,29 @@ F12로 크롬에서 개발자 도구 열기
 코드를 작성하는 기술  
 https://ko.javascript.info/coding-style
 
-## 3. 
+## 3. 주석
+https://ko.javascript.info/comments
+
+## 4. 닌자 코드
+하지 말아야 할 프로그래밍 코드 작성법  
+https://ko.javascript.info/ninja-code
+
+## 5. 테스트 자동화와 Mocha
+### Behavior Driven Developmnet
+bdd는 테스트, 문서, 예시를 묶어 놓은 개념이다
+#### 명세서
+코드가 무슨 일을 할지 상상하여 자연어로 표현하고 이를 명세서(specification)이라고 한다  
+
+스펙에는 `decribe("title",function() { ... }) 구현하고자 하는 기능에 대한 설명과  
+it("유스 케이스 설명", function() { ... }) 첫번째 인수에는 유스 케이스에 대한 설명, 두번째 인수에는 유스 케이스를 테스트할 함수가 들어간다  
+기능을 제대로 구현했다면 it내의 코드가 정상적으로 작동한다
+
+#### 스펙 실행하기
+Mocha - 핵심 프레임워크로 describe, it과 같은 테스팅 함수를 제공한다  
+Chai - 다양한 assertion을 제공한다  
+Sinon - 함수의 정보를 모방한다
+
+## 6. 폴리필
+#### 바벨
+1. 트랜스파일러 - 특정 엔진에서 작성한 코드를 지원하지 않을 때 구 표준을 준수하는 코드로 바꾸어 준다  
+2. 폴리필 - 변경된 표준을 준수하도록 기존 동작을 수정하거나 새롭게 추가된 함수의 스크립트를 폴리필이라고 한다 (core.js, polyfill.io)
