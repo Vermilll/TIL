@@ -9,3 +9,6 @@
 
 #### 220113
 [[모던 JavaScript 튜토리얼 - 코어 자바스크립트 - 코드 품질]](ModernJavascriptTutorial/CoreJavascript/CodingPractice.md)
+
+#### 220114
+[[모던 JavaScript 튜토리얼 - 코어 자바스크립트 - 객체: 기본]](ModernJavascriptTutorial/CoreJavascript/ObjectBasic.md)
