@@ -108,3 +108,113 @@ alert("hello");
 메서드의 내부에 `.`점 앞의 `this`는 해당 객체를 나타낸다  
 외부 변수를 사용해 참조할 때에는 원하지 않는 값을 참조할 수 있기 때문에 사용한다  
 화살표 함수에서 `this`를 사용하면 외부 변수 this를 가져올 수 있다
+
+## 5. new 연산자와 생성자 함수
+#### 생성자 함수
+함수 이름은 반드시 대문자로 작성  
+반드시 `new`를 붙여 실행
+```
+function User(name) {
+this.name = name;
+this.isAdmin = false;
+}
+
+let user = new User("보라");
+
+alert(user.name); //보라
+alert(user.isAdmin); //false
+```
+1. 빈 객체를 만들어 `this`에 할당한다  
+2. 함수 본문을 실행하여 `this`에 프로퍼티나 메서드를 추가한다
+3. `this`를 반환한다  
+
+* `new.target`함수를 사용하면 `new`를 호출했으면 함수를 아니면 `undefined`를 반환한다
+
+#### 생성자와 return문
+`return`은
+1. 객체에서 사용되면 `this` 대신 함수가 반환된다
+2. 원시형에서는 `return`이 무시된다
+
+## 6. 옵셔널 체이닝 '?'
+```
+let user = {};  //주소 정보가 없는 사용자
+alert(user && user.address && user.address.street); //undefined, &&를 사용하지 않으면 에러 발생
+```
+```
+let user = {};
+alert(user ?. address ?. street); // undefined
+```
+
+`?.`은 앞의 대상이 `undefined`나 `null`이면 평가를 멈추고 `undefined`를 반환한다  
+```
+let user=null;
+let x = 0;
+
+user ?. sayHi(x++); //아무 일도 일어나지 않는다
+```
+평가 대상에 값이 없는 경우에는 즉시 평가를 멈추기 때문에 오른쪽 동작을 하지 않는다
+
+#### ?.()와 ?.[]
+```
+let user1 = {
+admin(){
+alert("관리자 계정");}
+};
+let user2 = {};
+
+user1.admin?.(); //관리자 계정
+user2.admin?.(); //아무 일도 일어나지 않는다
+```
+`?.()`와 `?.[]`는 객체 존재가 확실할 경우에만 실행하거나 프로퍼티를 읽어 안전하게 객체를 사용할 수 있다
+
+## 7. 심볼형
+```
+let id1 = Symbol("심볼 이름");
+let id2 = Symbol("심볼 이름");
+
+alert(id1 == id2); //false
+alert(id1); //error
+```
+```
+let id = Symbol("id");
+let user = {
+name: "john",
+[id]: 123 };
+```
+객체 프로퍼티의 키는 문자와 심볼만 사용할 수 있는데 심볼은 유일한 식별자이다  
+이름표 역할을 하는 심볼 이름이 같아도 영향을 주지 않는다
+
+* 서드 파티에서 가져온 객체를 사용할 때 충돌을 막을 수 있다  
+* 키가 심볼인 프로퍼티는 `for..in` 반복문에서 제외 된다
+
+#### 전역 심볼 
+```
+let id = Symbol.for("id"); //심볼이 존재하지 않으면 새롭게 만든다
+let idAgain = Symbol.for("id");
+
+alert(id === idAgain); //true
+```
+전역 심볼 레지스트리 안에 심볼을 만들면 같은 이름의 심볼에 접근할 때는 동일한 심볼을 반환한다 /
+
+* `Symbol.keyFor`을 사용하면 반대로 전역 심볼의 이름을 얻을 수 있고 `ㅁ.description`은 일반 심볼의 이름을 얻을 수 있다
+
+## 8. 객체를 원시형으로 변환하기
+객체의 연산을 하는 등의 특정 행동은 객체가 원시형으로의 자동 형변환이 일어난다
+#### ToPrimitive
+특수 객체 메서드를 사용하면 원하는 형으로의 변환을 할 수 있는데 'hint'값이 구분 기준이 된다
+`"string"` : 문자열을 기대하는 연산에서는 hint가 `string`이 된다
+`"number"` : 수학 연산에서는 hint가 `number`가 된다
+`"defalt"` : 기대하는 자료형이 확실하지 않을 때에는 hint가 `defalt`가 된다
+* bollead hint값은 없다
+
+#### Symbol.toPrimitive
+```
+obj[Symbol.toPrimitive] = function(hint) {
+ // 반드시 원시 값을 반환해야 한다
+ };
+ ```
+ 해당 메서드를 통해 목표로 하는 자료형을 명명한다
+ 
+ #### toString과 valueOf
+ `Symbol.toPrimitive`가 없으면 자바스크립트는 `toString`과 `valueOf`를 호출한다  
+ hint가 string일 경우 `toString` -> `valueOf`순으로 호출하고 그 외에는 반대 순서로 호출한다
