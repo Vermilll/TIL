@@ -12,3 +12,6 @@
 
 #### 220114 ~ 220117
 [[모던 JavaScript 튜토리얼 - 코어 자바스크립트 - 객체: 기본]](ModernJavascriptTutorial/CoreJavascript/ObjectBasic.md)
+
+#### 220117 ~
+[[모던 JavaScript 튜토리얼 - 코어 자바스크립트 - 자료구조와 자료형]](ModernJavascriptTutorial/CoreJavascript/DataStructure.md)
